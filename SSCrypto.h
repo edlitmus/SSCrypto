@@ -104,6 +104,8 @@
 
 - (NSData *)digest:(NSString *)digestName;
 
++ (NSData *)generateRSAPrivateKeyWithLength:(int)length;
++ (NSData *)generateRSAPublicKeyFromPrivateKey:(NSData *)privateKey;
 + (NSData *)getKeyDataWithLength:(int)length;
 + (NSData *)getSHA1ForData:(NSData *)d;
 

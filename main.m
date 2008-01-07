@@ -99,23 +99,28 @@ int main (int argc, const char * argv[])
 	// DO NOT use the public/private keys from this project in your own application
 	
 	// You can generate your own private key by running the following command in the terminal:
-	// openssl genrsa -out private.pem 248
+	// openssl genrsa -out private.pem 2048
 	//
-	// Where 248 is the size of the private key.
+	// Where 2048 is the size of the private key.
 	// You may used a bigger number.
 	// It is probably a good recommendation to use at least 1024...
-	
+
 	// Then to extract the public key from the private key, use the following command:
 	// openssl rsa -in private.pem -out public.pem -outform PEM -pubout
 	
 	// If you are unfamiliar with the basics of Public-key cryptography, a great tutorial can be found on wikipedia:
 	// http://en.wikipedia.org/wiki/Public-key_cryptography
 	
-	NSString *publicKeyPath  = [[NSBundle mainBundle] pathForResource:@"PUBKEY" ofType:@"pem" inDirectory:@"../.."];
-	NSString *privateKeyPath = [[NSBundle mainBundle] pathForResource:@"Privatekey" ofType:@"pem" inDirectory:@"../.."];
-	
-	NSData *publicKeyData  = [NSData dataWithContentsOfFile:publicKeyPath];
-	NSData *privateKeyData = [NSData dataWithContentsOfFile:privateKeyPath];
+    NSData *privateKeyData = [SSCrypto generateRSAPrivateKeyWithLength:2048];
+    NSLog(@"privateKeyData: \n%s", [privateKeyData bytes]);
+    NSData *publicKeyData = [SSCrypto generateRSAPublicKeyFromPrivateKey:privateKeyData];
+    NSLog(@"publicKeyData: \n%s", [publicKeyData bytes]);
+
+//	NSString *publicKeyPath  = @"/tmp/public-1199732482.pem";
+//	NSString *privateKeyPath = @"/tmp/private-1199732482.pem";
+//
+//	NSData *publicKeyData  = [NSData dataWithContentsOfFile:publicKeyPath];
+//	NSData *privateKeyData = [NSData dataWithContentsOfFile:privateKeyPath];
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -167,7 +172,7 @@ int main (int argc, const char * argv[])
 	
 	NSData *encryptedTextData = [crypto encrypt];
 	NSData *decryptedTextData = [crypto decrypt];
-	
+
 	NSLog(@"Top Secret: %@", topSecret);
 	NSLog(@"Encrypted: %@", [encryptedTextData encodeBase64]);
 	NSLog(@"Decrypted: %s", [decryptedTextData bytes]);
@@ -178,7 +183,7 @@ int main (int argc, const char * argv[])
 	NSLog(@" ");
 	NSLog(@" ");
 	NSLog(@" ");
-	
+
 	[crypto release];
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

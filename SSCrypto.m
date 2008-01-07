@@ -1027,6 +1027,90 @@
 #pragma mark Class methods:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
++ (NSData *)generateRSAPrivateKeyWithLength:(int)length
+{
+    RSA *key = NULL;
+    do {
+        key = RSA_generate_key(length, RSA_F4, NULL, NULL);
+    } while (1 != RSA_check_key(key));
+
+    BIO *bio = BIO_new(BIO_s_mem());
+
+    if (!PEM_write_bio_RSAPrivateKey(bio, key, NULL, NULL, 0, NULL, NULL))
+    {
+        NSLog(@"cannot write private key to memory");
+        return nil;
+    }
+    if (key) RSA_free(key);
+
+    NSMutableData *data = [NSMutableData data];
+    void *buffer = (void *)malloc(length);
+    int res = 1;
+    while (res > 0) {
+        buffer = memset(buffer, '\0', length);
+        res = BIO_read(bio, buffer, length);
+        if (res >= 0) {
+            [data appendBytes:buffer length:length];
+        }
+    }
+    free(buffer);
+    if (bio) BIO_free(bio);
+
+    return [NSData dataWithData:(NSData *)data];
+}
+
++ (NSData *)generateRSAPublicKeyFromPrivateKey:(NSData *)privateKey
+{
+    BIO *privateBIO = NULL;
+	RSA *privateRSA = NULL;
+	
+	if (!(privateBIO = BIO_new_mem_buf((unsigned char*)[privateKey bytes], [privateKey length])))
+	{
+		NSLog(@"BIO_new_mem_buf() failed!");
+		return nil;
+	}
+	
+	if (!PEM_read_bio_RSAPrivateKey(privateBIO, &privateRSA, NULL, NULL))
+	{
+		NSLog(@"PEM_read_bio_RSAPrivateKey() failed!");
+		return nil;
+	}
+	
+	// RSA_check_key() returns 1 if rsa is a valid RSA key, and 0 otherwise.
+	
+	unsigned long check = RSA_check_key(privateRSA);
+	if (check != 1)
+	{
+		NSLog(@"RSA_check_key() failed with result %d!", check);
+		return nil;
+	}			
+
+    BIO *bio = BIO_new(BIO_s_mem());
+
+    if (!PEM_write_bio_RSA_PUBKEY(bio, privateRSA))
+    {
+        NSLog(@"cannot write public key to memory");
+        return nil;
+    }
+    int length = RSA_size(privateRSA);
+    if (privateRSA) RSA_free(privateRSA);
+
+    NSMutableData *data = [NSMutableData data];
+    void *buffer = (void *)malloc(length);
+    int res = 1;
+    while (res > 0) {
+        buffer = memset(buffer, '\0', length);
+        res = BIO_read(bio, buffer, length);
+        if (res >= 0) {
+            [data appendBytes:buffer length:length];
+        }
+    }
+    free(buffer);
+    if (bio) BIO_free(bio);
+    
+    return [NSData dataWithData:(NSData *)data];
+}
+
 + (NSData *)getKeyDataWithLength:(int)length
 {
     NSData *randData = nil;
