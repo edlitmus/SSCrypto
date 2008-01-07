@@ -94,10 +94,8 @@ int main (int argc, const char * argv[])
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// Load public and private key for next 2 tests...
-	
-	// DO NOT use the public/private keys from this project in your own application
-	
+	// Generate public and private key for next 2 tests...
+
 	// You can generate your own private key by running the following command in the terminal:
 	// openssl genrsa -out private.pem 2048
 	//
@@ -111,17 +109,19 @@ int main (int argc, const char * argv[])
 	// If you are unfamiliar with the basics of Public-key cryptography, a great tutorial can be found on wikipedia:
 	// http://en.wikipedia.org/wiki/Public-key_cryptography
 	
+    // generate a private key
     NSData *privateKeyData = [SSCrypto generateRSAPrivateKeyWithLength:2048];
     NSLog(@"privateKeyData: \n%s", [privateKeyData bytes]);
+    // generate a public key from the private key data
     NSData *publicKeyData = [SSCrypto generateRSAPublicKeyFromPrivateKey:privateKeyData];
     NSLog(@"publicKeyData: \n%s", [publicKeyData bytes]);
 
-//	NSString *publicKeyPath  = @"/tmp/public-1199732482.pem";
-//	NSString *privateKeyPath = @"/tmp/private-1199732482.pem";
-//
-//	NSData *publicKeyData  = [NSData dataWithContentsOfFile:publicKeyPath];
-//	NSData *privateKeyData = [NSData dataWithContentsOfFile:privateKeyPath];
-	
+    // At this point you would write the private and public keys to files
+    // for later use like so:
+    //
+    // [privateKeyData writeToFile:@"/some/file/path/private.pem" atomically:YES];
+    // [publicKeyData writeToFile:@"/some/file/path/public.pem" atomically:YES];
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// Test 4: Sign (encrypt), and then verify (decrypt) a string

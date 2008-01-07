@@ -682,6 +682,12 @@
 			64BAE9670D32CD5100A2BA46 /* PBXTextBookmark */ = 64BAE9670D32CD5100A2BA46 /* PBXTextBookmark */;
 			64BAE9680D32CD5100A2BA46 /* PBXTextBookmark */ = 64BAE9680D32CD5100A2BA46 /* PBXTextBookmark */;
 			64BAE9690D32CD5100A2BA46 /* PBXTextBookmark */ = 64BAE9690D32CD5100A2BA46 /* PBXTextBookmark */;
+			64BAE96A0D32CED300A2BA46 /* PBXTextBookmark */ = 64BAE96A0D32CED300A2BA46 /* PBXTextBookmark */;
+			64BAE96B0D32CED300A2BA46 /* PBXTextBookmark */ = 64BAE96B0D32CED300A2BA46 /* PBXTextBookmark */;
+			64BAE96C0D32CED300A2BA46 /* PBXTextBookmark */ = 64BAE96C0D32CED300A2BA46 /* PBXTextBookmark */;
+			64BAE96D0D32CFCE00A2BA46 /* PBXTextBookmark */ = 64BAE96D0D32CFCE00A2BA46 /* PBXTextBookmark */;
+			64BAE96E0D32CFCE00A2BA46 /* PBXTextBookmark */ = 64BAE96E0D32CFCE00A2BA46 /* PBXTextBookmark */;
+			64BAE96F0D32CFCE00A2BA46 /* PBXTextBookmark */ = 64BAE96F0D32CFCE00A2BA46 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 644463E905376E5B00E683DD /* Source Control */;
 		userBuildSettings = {
@@ -850,7 +856,7 @@
 		fRef = 6404DE3A064817C700087955 /* main.m */;
 		name = "main.m: 187";
 		rLen = 0;
-		rLoc = 6901;
+		rLoc = 6903;
 		rType = 0;
 		vrLen = 1488;
 		vrLoc = 5482;
@@ -955,7 +961,7 @@
 		isa = PBXTextBookmark;
 		fRef = 64BAE8F70D32C11D00A2BA46 /* main.m */;
 		rLen = 1;
-		rLoc = 113;
+		rLoc = 112;
 		rType = 1;
 	};
 	64BAE8FB0D32C16B00A2BA46 /* PBXTextBookmark */ = {
@@ -963,7 +969,7 @@
 		fRef = 64BAE8F70D32C11D00A2BA46 /* main.m */;
 		name = "main.m: 114";
 		rLen = 0;
-		rLoc = 3858;
+		rLoc = 3808;
 		rType = 0;
 		vrLen = 2030;
 		vrLoc = 2899;
@@ -1053,7 +1059,7 @@
 		fRef = 64BAE8F70D32C11D00A2BA46 /* main.m */;
 		name = "main.m: 117";
 		rLen = 0;
-		rLoc = 4106;
+		rLoc = 4385;
 		rType = 0;
 		vrLen = 2009;
 		vrLoc = 2899;
@@ -1094,7 +1100,7 @@
 		isa = PBXTextBookmark;
 		fRef = 64BAE90D0D32C45D00A2BA46 /* main.m */;
 		rLen = 0;
-		rLoc = 118;
+		rLoc = 123;
 		rType = 1;
 	};
 	64BAE90F0D32C46400A2BA46 /* PBXTextBookmark */ = {
@@ -1102,7 +1108,7 @@
 		fRef = 64BAE90D0D32C45D00A2BA46 /* main.m */;
 		name = "main.m: 118";
 		rLen = 0;
-		rLoc = 4106;
+		rLoc = 4385;
 		rType = 0;
 		vrLen = 2046;
 		vrLoc = 2899;
@@ -1183,7 +1189,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 118";
 		rLen = 0;
-		rLoc = 4106;
+		rLoc = 4385;
 		rType = 0;
 		vrLen = 2089;
 		vrLoc = 2899;
@@ -1232,7 +1238,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 118";
 		rLen = 0;
-		rLoc = 4106;
+		rLoc = 4385;
 		rType = 0;
 		vrLen = 2089;
 		vrLoc = 2899;
@@ -1244,9 +1250,9 @@
 		path = /Users/ed/Projects/SSCrypto/SSCrypto.m;
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1028, 15736}}";
-			sepNavSelRange = "{31561, 67}";
-			sepNavVisRange = "{31324, 807}";
+			sepNavIntBoundsRect = "{{0, 0}, {1028, 15792}}";
+			sepNavSelRange = "{30731, 2153}";
+			sepNavVisRange = "{32211, 927}";
 		};
 	};
 	64BAE9280D32C4EC00A2BA46 /* PBXTextBookmark */ = {
@@ -1261,7 +1267,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 115";
 		rLen = 0;
-		rLoc = 3929;
+		rLoc = 3879;
 		rType = 0;
 		vrLen = 2097;
 		vrLoc = 2899;
@@ -1311,7 +1317,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 115";
 		rLen = 0;
-		rLoc = 3929;
+		rLoc = 3879;
 		rType = 0;
 		vrLen = 2097;
 		vrLoc = 2899;
@@ -1341,7 +1347,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 115";
 		rLen = 0;
-		rLoc = 3929;
+		rLoc = 3879;
 		rType = 0;
 		vrLen = 2097;
 		vrLoc = 2899;
@@ -1371,7 +1377,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 115";
 		rLen = 0;
-		rLoc = 3929;
+		rLoc = 3879;
 		rType = 0;
 		vrLen = 2097;
 		vrLoc = 2899;
@@ -1401,7 +1407,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 115";
 		rLen = 0;
-		rLoc = 3956;
+		rLoc = 3906;
 		rType = 0;
 		vrLen = 2097;
 		vrLoc = 2899;
@@ -1431,7 +1437,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 116";
 		rLen = 34;
-		rLoc = 3995;
+		rLoc = 4000;
 		rType = 0;
 		vrLen = 2138;
 		vrLoc = 2899;
@@ -1481,7 +1487,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 116";
 		rLen = 34;
-		rLoc = 3995;
+		rLoc = 4000;
 		rType = 0;
 		vrLen = 2138;
 		vrLoc = 2899;
@@ -1511,7 +1517,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 116";
 		rLen = 34;
-		rLoc = 3995;
+		rLoc = 4000;
 		rType = 0;
 		vrLen = 2138;
 		vrLoc = 2899;
@@ -1541,7 +1547,7 @@
 		fRef = 64BAE9120D32C47300A2BA46 /* main.m */;
 		name = "main.m: 116";
 		rLen = 34;
-		rLoc = 3995;
+		rLoc = 4000;
 		rType = 0;
 		vrLen = 2138;
 		vrLoc = 2899;
@@ -1554,15 +1560,15 @@
 		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1148, 2716}}";
-			sepNavSelRange = "{6901, 0}";
-			sepNavVisRange = "{5425, 1650}";
+			sepNavSelRange = "{4185, 0}";
+			sepNavVisRange = "{2948, 2267}";
 		};
 	};
 	64BAE9580D32CC9C00A2BA46 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 64BAE9570D32CC9C00A2BA46 /* main.m */;
 		rLen = 0;
-		rLoc = 114;
+		rLoc = 113;
 		rType = 1;
 	};
 	64BAE9590D32CCBD00A2BA46 /* PBXTextBookmark */ = {
@@ -1570,7 +1576,7 @@
 		fRef = 64BAE9570D32CC9C00A2BA46 /* main.m */;
 		name = "main.m: 119";
 		rLen = 0;
-		rLoc = 4106;
+		rLoc = 4385;
 		rType = 0;
 		vrLen = 2021;
 		vrLoc = 2899;
@@ -1600,7 +1606,7 @@
 		fRef = 64BAE9570D32CC9C00A2BA46 /* main.m */;
 		name = "main.m: 115";
 		rLen = 0;
-		rLoc = 3897;
+		rLoc = 3847;
 		rType = 0;
 		vrLen = 2149;
 		vrLoc = 2899;
@@ -1650,7 +1656,7 @@
 		fRef = 64BAE9570D32CC9C00A2BA46 /* main.m */;
 		name = "main.m: 187";
 		rLen = 0;
-		rLoc = 6901;
+		rLoc = 6903;
 		rType = 0;
 		vrLen = 1650;
 		vrLoc = 5425;
@@ -1674,6 +1680,66 @@
 		rType = 0;
 		vrLen = 807;
 		vrLoc = 31324;
+	};
+	64BAE96A0D32CED300A2BA46 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 64BAE9570D32CC9C00A2BA46 /* main.m */;
+		name = "main.m: 118";
+		rLen = 0;
+		rLoc = 4385;
+		rType = 0;
+		vrLen = 2292;
+		vrLoc = 2948;
+	};
+	64BAE96B0D32CED300A2BA46 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 644463E305376E3900E683DD /* SSCrypto.h */;
+		name = "SSCrypto.h: 108";
+		rLen = 0;
+		rLoc = 3372;
+		rType = 0;
+		vrLen = 804;
+		vrLoc = 2661;
+	};
+	64BAE96C0D32CED300A2BA46 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 64BAE9270D32C4EC00A2BA46 /* SSCrypto.m */;
+		name = "SSCrypto.m: 1030";
+		rLen = 2153;
+		rLoc = 30731;
+		rType = 0;
+		vrLen = 927;
+		vrLoc = 32211;
+	};
+	64BAE96D0D32CFCE00A2BA46 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 64BAE9570D32CC9C00A2BA46 /* main.m */;
+		name = "main.m: 120";
+		rLen = 0;
+		rLoc = 4185;
+		rType = 0;
+		vrLen = 2267;
+		vrLoc = 2948;
+	};
+	64BAE96E0D32CFCE00A2BA46 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 644463E305376E3900E683DD /* SSCrypto.h */;
+		name = "SSCrypto.h: 108";
+		rLen = 0;
+		rLoc = 3372;
+		rType = 0;
+		vrLen = 804;
+		vrLoc = 2661;
+	};
+	64BAE96F0D32CFCE00A2BA46 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 64BAE9270D32C4EC00A2BA46 /* SSCrypto.m */;
+		name = "SSCrypto.m: 1030";
+		rLen = 2153;
+		rLoc = 30731;
+		rType = 0;
+		vrLen = 927;
+		vrLoc = 32211;
 	};
 	8DC2EF4F0486A6940098B216 /* SSCrypto */ = {
 		activeExec = 0;
