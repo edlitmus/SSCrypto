@@ -515,7 +515,7 @@
         return nil;
     }
     
-    unsigned char *outbuf;
+    unsigned char *outbuf, iv[EVP_MAX_IV_LENGTH];
     int outlen, templen, inlen;
     inlen = [cipherText length];
     unsigned char *input = (unsigned char *)[cipherText bytes];
@@ -527,7 +527,7 @@
         unsigned char evp_key[EVP_MAX_KEY_LENGTH] = {"\0"};
         EVP_CIPHER_CTX cCtx;
         const EVP_CIPHER *cipher;
-        
+
         if(cipherName)
 		{
             cipher = EVP_get_cipherbyname((const char *)[cipherName UTF8String]);
@@ -548,10 +548,10 @@
         }
         
         EVP_BytesToKey(cipher, EVP_md5(), NULL,
-                       [[self symmetricKey] bytes], [[self symmetricKey] length], 1, evp_key, NULL);
+                       [[self symmetricKey] bytes], [[self symmetricKey] length], 1, evp_key, iv);
         EVP_CIPHER_CTX_init(&cCtx);
 
-        if (!EVP_DecryptInit(&cCtx, cipher, evp_key, NULL)) {
+        if (!EVP_DecryptInit(&cCtx, cipher, evp_key, iv)) {
             NSLog(@"EVP_DecryptInit() failed!");
             EVP_CIPHER_CTX_cleanup(&cCtx);
             return nil;
@@ -764,7 +764,7 @@
     }
 
     unsigned char *input = (unsigned char *)[clearText bytes];
-    unsigned char *outbuf;
+    unsigned char *outbuf, iv[EVP_MAX_IV_LENGTH];
     int outlen, templen, inlen;
     inlen = [clearText length];
     
@@ -791,10 +791,10 @@
         }
 
         EVP_BytesToKey(cipher, EVP_md5(), NULL,
-                       [[self symmetricKey] bytes], [[self symmetricKey] length], 1, evp_key, NULL);        
+                       [[self symmetricKey] bytes], [[self symmetricKey] length], 1, evp_key, iv);
         EVP_CIPHER_CTX_init(&cCtx);
 
-        if (!EVP_EncryptInit(&cCtx, cipher, evp_key, NULL)) {
+        if (!EVP_EncryptInit(&cCtx, cipher, evp_key, iv)) {
             NSLog(@"EVP_EncryptInit() failed!");
             EVP_CIPHER_CTX_cleanup(&cCtx);
             return nil;
