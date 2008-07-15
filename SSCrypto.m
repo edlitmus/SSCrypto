@@ -851,7 +851,7 @@
         
         if(!(outlen = RSA_public_encrypt(inlen, input, (unsigned char*)outbuf, publicRSA, RSA_PKCS1_PADDING)))
 		{
-            NSLog(@"RSA_public_encrypt failed!", outlen);
+            NSLog(@"RSA_public_encrypt failed!");
             return nil;
         }
         
@@ -935,7 +935,7 @@
 	
 	if(!(outlen = RSA_private_encrypt(inlen, input, (unsigned char*)outbuf, privateRSA, RSA_PKCS1_PADDING)))
 	{
-		NSLog(@"RSA_private_encrypt failed!", outlen);
+		NSLog(@"RSA_private_encrypt failed!");
 		return nil;
 	}
 	
