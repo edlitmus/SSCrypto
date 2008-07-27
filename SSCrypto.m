@@ -1141,5 +1141,16 @@
     return [NSData dataWithBytesNoCopy:md length:SHA_DIGEST_LENGTH freeWhenDone:YES];
 }
 
++ (NSData *)getMD5ForData:(NSData *)d
+{
+	unsigned length = [d length];
+    const void *buffer = [d bytes];
+    unsigned char *md = (unsigned char *)calloc(MD5_DIGEST_LENGTH, sizeof(unsigned char));
+    NSAssert((md != NULL), @"Cannot calloc memory for buffer.");
+	
+	(void)MD5(buffer, length, md);
+	
+    return [NSData dataWithBytesNoCopy:md length:MD5_DIGEST_LENGTH freeWhenDone:YES];
+}
 
 @end

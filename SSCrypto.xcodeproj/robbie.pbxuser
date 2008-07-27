@@ -1,6 +1,7 @@
 // !$*UTF8*$!
 {
 	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeArchitecture = i386;
 		activeBuildConfigurationName = Deployment;
 		activeExecutable = DC6F824A0B110DA50076C868 /* SSCryptoTest */;
 		activeTarget = 6404DE35064817A000087955 /* SSCryptoTest */;
@@ -67,12 +68,12 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 185694839;
-			PBXWorkspaceStateSaveDate = 185694839;
+			PBXPerProjectTemplateStateSaveDate = 238889252;
+			PBXWorkspaceStateSaveDate = 238889252;
 		};
 		perUserProjectItems = {
-			DC26E8450B117A9200B6B389 /* PBXTextBookmark */ = DC26E8450B117A9200B6B389 /* PBXTextBookmark */;
-			DC26E8460B117A9200B6B389 /* PBXTextBookmark */ = DC26E8460B117A9200B6B389 /* PBXTextBookmark */;
+			DC1DC5420E3D296C0044206D /* PBXTextBookmark */ = DC1DC5420E3D296C0044206D /* PBXTextBookmark */;
+			DC1DC5430E3D296C0044206D /* PBXTextBookmark */ = DC1DC5430E3D296C0044206D /* PBXTextBookmark */;
 		};
 		sourceControlManager = DC6F82540B110DC70076C868 /* Source Control */;
 		userBuildSettings = {
@@ -93,8 +94,9 @@
 	};
 	6404DE3A064817C700087955 /* main.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {777, 2646}}";
+			sepNavIntBoundsRect = "{{0, 0}, {763, 2912}}";
 			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1230}";
 			sepNavVisRect = "{{0, 0}, {777, 534}}";
 		};
 	};
@@ -112,13 +114,6 @@
 			sepNavVisRect = "{{0, 2420}, {777, 534}}";
 		};
 	};
-	64BB490307218DBB00A680C5 /* Privatekey.pem */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {777, 534}}";
-			sepNavSelRange = "{263, 0}";
-			sepNavVisRect = "{{0, 0}, {777, 534}}";
-		};
-	};
 	8DC2EF4F0486A6940098B216 /* SSCrypto */ = {
 		activeExec = 0;
 	};
@@ -129,34 +124,34 @@
 			sepNavVisRect = "{{0, 0}, {777, 534}}";
 		};
 	};
-	DC26E8450B117A9200B6B389 /* PBXTextBookmark */ = {
+	DC1DC5420E3D296C0044206D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 6404DE3A064817C700087955 /* main.m */;
 		name = "main.m: 1";
 		rLen = 0;
 		rLoc = 0;
 		rType = 0;
-		vrLen = 1198;
+		vrLen = 1230;
 		vrLoc = 0;
 	};
-	DC26E8460B117A9200B6B389 /* PBXTextBookmark */ = {
+	DC1DC5430E3D296C0044206D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 6404DE3A064817C700087955 /* main.m */;
 		name = "main.m: 1";
 		rLen = 0;
 		rLoc = 0;
 		rType = 0;
-		vrLen = 1198;
+		vrLen = 1230;
 		vrLoc = 0;
 	};
 	DC6F824A0B110DA50076C868 /* SSCryptoTest */ = {
 		isa = PBXExecutable;
-		activeArgIndex = 2147483647;
 		activeArgIndices = (
 		);
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;

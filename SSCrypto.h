@@ -108,5 +108,6 @@
 + (NSData *)generateRSAPublicKeyFromPrivateKey:(NSData *)privateKey;
 + (NSData *)getKeyDataWithLength:(int)length;
 + (NSData *)getSHA1ForData:(NSData *)d;
++ (NSData *)getMD5ForData:(NSData *)d;
 
 @end

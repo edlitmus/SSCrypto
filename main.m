@@ -10,10 +10,11 @@ int main (int argc, const char * argv[])
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// TEST 1: Get SHA1 digest for string
+	// TEST 1: Get SHA1 and MD5 digest for string
 	
 	// This is the same as running the following command in the terminal:
 	// echo -n "foo" | openssl dgst -sha1
+	// echo -n "foo" | openssl dgst -md5
 	
 	NSString *name = @"foo";
 	
@@ -21,10 +22,16 @@ int main (int argc, const char * argv[])
 	[crypto setClearTextWithString:name];
 	
 	NSLog(@"Name: %@", [crypto clearTextAsString]);
+	
 	NSLog(@"SHA1 Digest of Name using digest method: %@", [[crypto digest:@"SHA1"] hexval]);
 	
 	NSData *sha1Name = [SSCrypto getSHA1ForData:[name dataUsingEncoding:NSUTF8StringEncoding]];
 	NSLog(@"SHA1 Digest using getSHA1ForData method: %@", [sha1Name hexval]);
+	
+	NSLog(@"MD5 Digest of Name using digest method: %@", [[crypto digest:@"MD5"] hexval]);
+	
+	NSData *md5Name = [SSCrypto getMD5ForData:[name dataUsingEncoding:NSUTF8StringEncoding]];
+	NSLog(@"MD5 Digest using getMD5ForData method : %@", [md5Name hexval]);
 	
 	NSLog(@" ");
 	NSLog(@" ");
@@ -72,8 +79,7 @@ int main (int argc, const char * argv[])
 	// Where -md5 is the digest to use.
 	// See man dgst for a list of all available digests.
 	
-	NSData *seedData2 = [SSCrypto getKeyDataWithLength:32];
-	crypto = [[SSCrypto alloc] initWithSymmetricKey:seedData2];
+	crypto = [[SSCrypto alloc] init];
 	
 	NSArray *digests = [NSArray arrayWithObjects:@"MD2", @"MD4", @"MD5", @"SHA1", @"RIPEMD160", nil];
 	
