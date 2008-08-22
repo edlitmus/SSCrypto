@@ -413,7 +413,7 @@
 **/
 - (NSString *)clearTextAsString
 {
-    return [[[NSString alloc] initWithFormat:@"%s", [[self clearTextAsData] bytes]] autorelease];
+    return [[[NSString alloc] initWithData:[self clearTextAsData] encoding:[NSString defaultCStringEncoding]] autorelease];
 }
 
 /**
@@ -454,11 +454,7 @@
 **/
 - (NSString *)cipherTextAsString
 {
-    return [[[NSString alloc] initWithFormat:@"%s", [[self cipherTextAsData] bytes]] autorelease];
-	
-	// String formatting documentation for %s :
-	// Null-terminated array of 8-bit unsigned characters.
-	// %s interprets its input in the system encoding rather than, for example, UTF-8.
+    return [[[NSString alloc] initWithData:[self cipherTextAsData] encoding:[NSString defaultCStringEncoding]] autorelease];
 }
 
 /**
