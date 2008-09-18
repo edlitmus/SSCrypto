@@ -1039,20 +1039,14 @@
     }
     if (key) RSA_free(key);
 
-    NSMutableData *data = [NSMutableData data];
-    void *buffer = (void *)malloc(length);
-    int res = 1;
-    while (res > 0) {
-        buffer = memset(buffer, '\0', length);
-        res = BIO_read(bio, buffer, length);
-        if (res >= 0) {
-            [data appendBytes:buffer length:length];
-        }
-    }
-    free(buffer);
-    if (bio) BIO_free(bio);
+    char *pbio_data = NULL;
+    int data_len = BIO_get_mem_data(bio, &pbio_data);
+    NSData *result = [NSData dataWithBytes:pbio_data length:data_len];
+    
+    if (bio)
+        BIO_free(bio);
 
-    return [NSData dataWithData:(NSData *)data];
+    return result;
 }
 
 + (NSData *)generateRSAPublicKeyFromPrivateKey:(NSData *)privateKey
@@ -1088,23 +1082,16 @@
         NSLog(@"cannot write public key to memory");
         return nil;
     }
-    int length = RSA_size(privateRSA);
     if (privateRSA) RSA_free(privateRSA);
 
-    NSMutableData *data = [NSMutableData data];
-    void *buffer = (void *)malloc(length);
-    int res = 1;
-    while (res > 0) {
-        buffer = memset(buffer, '\0', length);
-        res = BIO_read(bio, buffer, length);
-        if (res >= 0) {
-            [data appendBytes:buffer length:length];
-        }
-    }
-    free(buffer);
-    if (bio) BIO_free(bio);
+    char *pbio_data = NULL;
+    int data_len = BIO_get_mem_data(bio, &pbio_data);
+    NSData *result = [NSData dataWithBytes:pbio_data length:data_len];
     
-    return [NSData dataWithData:(NSData *)data];
+    if (bio)
+        BIO_free(bio);
+
+    return result;
 }
 
 + (NSData *)getKeyDataWithLength:(int)length
