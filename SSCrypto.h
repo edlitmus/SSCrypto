@@ -107,6 +107,8 @@
 + (NSData *)generateRSAPrivateKeyWithLength:(int)length;
 + (NSData *)generateRSAPublicKeyFromPrivateKey:(NSData *)privateKey;
 + (NSData *)getKeyDataWithLength:(int)length;
++ (NSData *)getKeyDataWithLength:(int)length fromPassword:(NSString *)pass withSalt:(NSString *)salt;
++ (NSData *)getKeyDataWithLength:(int)length fromPassword:(NSString *)pass withSalt:(NSString *)salt withIterations:(int)count;
 + (NSData *)getSHA1ForData:(NSData *)d;
 + (NSData *)getMD5ForData:(NSData *)d;
 

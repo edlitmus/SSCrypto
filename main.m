@@ -193,7 +193,18 @@ int main (int argc, const char * argv[])
 	[crypto release];
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
+	// Test 6: PBKDF2
+    
+    NSString *password2 = @"password2";
+    NSString *salt = @"this is a salt";
+
+    NSData *key = [SSCrypto getKeyDataWithLength:256 fromPassword:password2 withSalt:salt withIterations:24];
+    NSLog(@"PBKDF2 Key: \n%@", [key encodeBase64]);
+
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	[pool release];
     return 0;
 }
