@@ -542,37 +542,63 @@
                 return nil;
             }
         }
+		
+		// Sometimes OpenSSL encrypted data contains an 8 byte salt.
+		// This is indicated by the "Salted__" prefix in the encrypted data.
+		
+		NSData *salt = nil;
+		
+		if([cipherText length] > 8+8)
+		{
+			if(strncmp((const char *)[cipherText bytes], "Salted__", 8) == 0)
+			{
+				salt = [cipherText subdataWithRange:NSMakeRange(8, 8)];
+				
+				input += 16;
+				inlen -= 16;
+			}
+		}
         
-        EVP_BytesToKey(cipher, EVP_md5(), NULL,
-                       [[self symmetricKey] bytes], [[self symmetricKey] length], 1, evp_key, iv);
+        EVP_BytesToKey(cipher, EVP_md5(), [salt bytes],
+					   [symmetricKey bytes], [symmetricKey length], 1, evp_key, iv);
+		
         EVP_CIPHER_CTX_init(&cCtx);
 
-        if (!EVP_DecryptInit(&cCtx, cipher, evp_key, iv)) {
+        if (!EVP_DecryptInit(&cCtx, cipher, evp_key, iv))
+		{
             NSLog(@"EVP_DecryptInit() failed!");
             EVP_CIPHER_CTX_cleanup(&cCtx);
             return nil;
         }
         EVP_CIPHER_CTX_set_key_length(&cCtx, EVP_MAX_KEY_LENGTH);
-
-        // add a couple extra blocks to the outbuf to be safe
-        outbuf = (unsigned char *)calloc(inlen+32, sizeof(unsigned char));
+		
+        // The data buffer passed to EVP_DecryptUpdate() should have sufficient room for
+		// (input_length + cipher_block_size) bytes unless the cipher block size is 1 in which
+		// case input_length bytes is sufficient.
+		
+		if(EVP_CIPHER_CTX_block_size(&cCtx) > 1)
+			outbuf = (unsigned char *)calloc(inlen + EVP_CIPHER_CTX_block_size(&cCtx), sizeof(unsigned char));
+		else
+			outbuf = (unsigned char *)calloc(inlen, sizeof(unsigned char));
+			
         NSAssert(outbuf, @"Cannot allocate memory for buffer!");
         
-        if (!EVP_DecryptUpdate(&cCtx, outbuf, &outlen, input, inlen)){
-            NSLog(@"EVP_DecryptUpdate() failed!");
-            EVP_CIPHER_CTX_cleanup(&cCtx);
-            return nil;
+        if (!EVP_DecryptUpdate(&cCtx, outbuf, &outlen, input, inlen))
+		{
+			NSLog(@"EVP_DecryptUpdate() failed!");
+			EVP_CIPHER_CTX_cleanup(&cCtx);
+			return nil;
         }
         
-        if (!EVP_DecryptFinal(&cCtx, outbuf + outlen, &templen)){
-            NSLog(@"EVP_DecryptFinal() failed!");
-            EVP_CIPHER_CTX_cleanup(&cCtx);
-            return nil;
+        if (!EVP_DecryptFinal(&cCtx, outbuf + outlen, &templen))
+		{
+			NSLog(@"EVP_DecryptFinal() failed!");
+			EVP_CIPHER_CTX_cleanup(&cCtx);
+			return nil;
         }
         
         outlen += templen;
         EVP_CIPHER_CTX_cleanup(&cCtx);
-        
     }
 	else
 	{
@@ -796,20 +822,24 @@
             return nil;
         }
         EVP_CIPHER_CTX_set_key_length(&cCtx, EVP_MAX_KEY_LENGTH);
-
-        // add a couple extra blocks to the outbuf to be safe
-        outbuf = (unsigned char *)calloc(inlen + EVP_CIPHER_CTX_block_size(&cCtx), sizeof(unsigned char));
+		
+		// The data buffer passed to EVP_EncryptUpdate() should have sufficient room for
+		// (input_length + cipher_block_size - 1)
+		
+        outbuf = (unsigned char *)calloc(inlen + EVP_CIPHER_CTX_block_size(&cCtx) - 1, sizeof(unsigned char));
         NSAssert(outbuf, @"Cannot allocate memory for buffer!");
         
-        if (!EVP_EncryptUpdate(&cCtx, outbuf, &outlen, input, inlen)){
-            NSLog(@"EVP_EncryptUpdate() failed!");
-            EVP_CIPHER_CTX_cleanup(&cCtx);
-            return nil;
+        if (!EVP_EncryptUpdate(&cCtx, outbuf, &outlen, input, inlen))
+		{
+			NSLog(@"EVP_EncryptUpdate() failed!");
+			EVP_CIPHER_CTX_cleanup(&cCtx);
+			return nil;
         }
-        if (!EVP_EncryptFinal(&cCtx, outbuf + outlen, &templen)){
-            NSLog(@"EVP_EncryptFinal() failed!");
-            EVP_CIPHER_CTX_cleanup(&cCtx);
-            return nil;
+        if (!EVP_EncryptFinal(&cCtx, outbuf + outlen, &templen))
+		{
+			NSLog(@"EVP_EncryptFinal() failed!");
+			EVP_CIPHER_CTX_cleanup(&cCtx);
+			return nil;
         }
         outlen += templen;
         EVP_CIPHER_CTX_cleanup(&cCtx);
