@@ -413,7 +413,7 @@
 **/
 - (NSString *)clearTextAsString
 {
-    return [[[NSString alloc] initWithData:[self clearTextAsData] encoding:[NSString defaultCStringEncoding]] autorelease];
+    return [[[NSString alloc] initWithData:[self clearTextAsData] encoding:NSUTF8StringEncoding] autorelease];
 }
 
 /**
@@ -432,11 +432,23 @@
 /**
  * Sets the clear text using the given string.
  * The clear text will be used for encryption, signing, and digests.
-**/
+ **/
 - (void)setClearTextWithString:(NSString *)c
 {
 	[clearText release];
-	clearText = [[NSData alloc] initWithBytes:[c UTF8String] length:[c length]];
+    
+	// BUG FIX : PLL (2009/02/21)
+	//
+	// [c length] : Returns the number of Unicode characters in the receiver.
+	// For example "éàç test" in UTF8 is 11 bytes (c3 a9 c3 a0 c3 a7 20 74 65 73 74)
+	// but only 8 Unicode characters.
+	// So this will truncate the text and result in one error.
+	//
+	// clearText = [[NSData alloc] initWithBytes:[c UTF8String] length:[c length]];
+	
+	// The number of bytes required to store the receiver in the encoding enc in a non-external representation. The length does not include space for a terminating NULL character.
+	NSUInteger length = [c lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+	clearText = [[NSData alloc] initWithBytes:[c UTF8String] length:length];
 }
 
 /**
@@ -454,7 +466,7 @@
 **/
 - (NSString *)cipherTextAsString
 {
-    return [[[NSString alloc] initWithData:[self cipherTextAsData] encoding:[NSString defaultCStringEncoding]] autorelease];
+    return [[[NSString alloc] initWithData:[self cipherTextAsData] encoding:NSUTF8StringEncoding] autorelease];
 }
 
 /**

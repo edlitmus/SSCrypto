@@ -204,7 +204,40 @@ int main (int argc, const char * argv[])
 
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Test 7: Encrypt, and then decrypt a UTF8 string
+	
+	// Encrypting is the same as running the following command in the terminal:
+	// cat moose.txt | openssl rsautl -encrypt -inkey PUBKEY.pem -pubin | openssl enc -base64
+	// 
+	// Note: you'll get a different encryption everytime, so don't expect them to be the same...
+	
+	// Decrypting is the same as running the following command in the terminal:
+	// echo -n "SLSbd6..."| openssl enc -base64 -d | openssl rsautl -decrypt -inkey Privatekey.pem
+	
+	crypto = [[SSCrypto alloc] initWithPublicKey:publicKeyData privateKey:privateKeyData];
+	
+    NSError *err;
+	topSecret = [NSString stringWithContentsOfFile:@"../../moose.txt" encoding:NSUTF8StringEncoding error:&err];
+	[crypto setClearTextWithString:topSecret];
+	
+	encryptedTextData = [crypto encrypt];
+	decryptedTextData = [crypto decrypt];
+    
+	NSLog(@"Top Secret: %@", topSecret);
+	NSLog(@"Top Secret: %@", [[crypto clearTextAsData] hexval]);
+	NSLog(@"Encrypted:\n%@", [encryptedTextData encodeBase64]);
+	NSLog(@"Decrypted: %@", [decryptedTextData hexval]);
+	NSLog(@"Decrypted: %@", [crypto clearTextAsString]);
+	
+	NSLog(@" ");
+	NSLog(@" ");
+	NSLog(@" ");
+    
+	[crypto release];
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 	[pool release];
     return 0;
 }
