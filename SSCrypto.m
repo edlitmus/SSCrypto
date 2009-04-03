@@ -440,14 +440,14 @@
 	// BUG FIX : PLL (2009/02/21)
 	//
 	// [c length] : Returns the number of Unicode characters in the receiver.
-	// For example "éàç test" in UTF8 is 11 bytes (c3 a9 c3 a0 c3 a7 20 74 65 73 74)
+	// For example "√©√†√ß test" in UTF8 is 11 bytes (c3 a9 c3 a0 c3 a7 20 74 65 73 74)
 	// but only 8 Unicode characters.
 	// So this will truncate the text and result in one error.
 	//
 	// clearText = [[NSData alloc] initWithBytes:[c UTF8String] length:[c length]];
 	
 	// The number of bytes required to store the receiver in the encoding enc in a non-external representation. The length does not include space for a terminating NULL character.
-	NSUInteger length = [c lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+	unsigned int length = [c lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
 	clearText = [[NSData alloc] initWithBytes:[c UTF8String] length:length];
 }
 
