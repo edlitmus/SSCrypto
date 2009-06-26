@@ -75,7 +75,11 @@
     // Create a new string from the data in the memory buffer
     char * base64Pointer;
     long base64Length = BIO_get_mem_data(mem, &base64Pointer);
-    NSString * base64String = [NSString stringWithCString:base64Pointer length:base64Length];
+    // we use an NSData here since the base64pointer is not null terminated
+    // the byte array the NSData return should be
+    // so making an NSString from that will be okay
+    NSData * base64data = [NSData dataWithBytes:base64Pointer length:base64Length];
+    NSString * base64String = [NSString stringWithUTF8String:[base64data bytes]];
 
     // Clean up and go home
     BIO_free_all(mem);
@@ -440,7 +444,7 @@
 	// BUG FIX : PLL (2009/02/21)
 	//
 	// [c length] : Returns the number of Unicode characters in the receiver.
-	// For example "√©√†√ß test" in UTF8 is 11 bytes (c3 a9 c3 a0 c3 a7 20 74 65 73 74)
+	// For example "‚àö¬©‚àö‚Ä†‚àö√ü test" in UTF8 is 11 bytes (c3 a9 c3 a0 c3 a7 20 74 65 73 74)
 	// but only 8 Unicode characters.
 	// So this will truncate the text and result in one error.
 	//
