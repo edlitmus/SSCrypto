@@ -44,6 +44,7 @@
 #import <openssl/bio.h>
 #import <openssl/err.h>
 #import <openssl/ssl.h>
+#import <openssl/md5.h>
 
 @interface NSData (HexDump)
 - (NSString *)encodeBase64;

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,8 +12,10 @@
 		6404DE440648185200087955 /* SSCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 644463E305376E3900E683DD /* SSCrypto.h */; };
 		644463E505376E3900E683DD /* SSCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 644463E305376E3900E683DD /* SSCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		644463E605376E3900E683DD /* SSCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 644463E405376E3900E683DD /* SSCrypto.m */; };
-		644463FC05376EE100E683DD /* libssl.0.9.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 644463FB05376EE100E683DD /* libssl.0.9.7.dylib */; };
-		6444640205376EF300E683DD /* libcrypto.0.9.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6444640105376EF300E683DD /* libcrypto.0.9.7.dylib */; };
+		64EF94421069182A0020558C /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64EF94411069182A0020558C /* libcrypto.dylib */; };
+		64EF94441069183F0020558C /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64EF94431069183F0020558C /* libssl.dylib */; };
+		64EF945B10691A350020558C /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64EF94411069182A0020558C /* libcrypto.dylib */; };
+		64EF945C10691A390020558C /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64EF94431069183F0020558C /* libssl.dylib */; };
 		8DC2EF510486A6940098B216 /* SSCrypto_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF5E0370ADEE00C91783 /* SSCrypto_Prefix.pch */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF550486A6940098B216 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B4FE84181DC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
@@ -50,11 +52,11 @@
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF5E0370ADEE00C91783 /* SSCrypto_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCrypto_Prefix.pch; sourceTree = "<group>"; };
 		6404DE36064817A000087955 /* SSCryptoTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SSCryptoTest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6404DE3A064817C700087955 /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
+		6404DE3A064817C700087955 /* main.m */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
 		644463E305376E3900E683DD /* SSCrypto.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SSCrypto.h; sourceTree = "<group>"; };
 		644463E405376E3900E683DD /* SSCrypto.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SSCrypto.m; sourceTree = "<group>"; };
-		644463FB05376EE100E683DD /* libssl.0.9.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.0.9.7.dylib; path = /usr/lib/libssl.0.9.7.dylib; sourceTree = "<absolute>"; };
-		6444640105376EF300E683DD /* libcrypto.0.9.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.0.9.7.dylib; path = /usr/lib/libcrypto.0.9.7.dylib; sourceTree = "<absolute>"; };
+		64EF94411069182A0020558C /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = /usr/lib/libcrypto.dylib; sourceTree = "<absolute>"; };
+		64EF94431069183F0020558C /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = /usr/lib/libssl.dylib; sourceTree = "<absolute>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* SSCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SSCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -65,6 +67,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6404DE430648184800087955 /* SSCrypto.framework in Frameworks */,
+				64EF94421069182A0020558C /* libcrypto.dylib in Frameworks */,
+				64EF94441069183F0020558C /* libssl.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,9 +76,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64EF945C10691A390020558C /* libssl.dylib in Frameworks */,
+				64EF945B10691A350020558C /* libcrypto.dylib in Frameworks */,
 				8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */,
-				644463FC05376EE100E683DD /* libssl.0.9.7.dylib in Frameworks */,
-				6444640205376EF300E683DD /* libcrypto.0.9.7.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,9 +137,9 @@
 		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				64EF94431069183F0020558C /* libssl.dylib */,
+				64EF94411069182A0020558C /* libcrypto.dylib */,
 				1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */,
-				644463FB05376EE100E683DD /* libssl.0.9.7.dylib */,
-				6444640105376EF300E683DD /* libcrypto.0.9.7.dylib */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -226,7 +230,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 64A753D308F3259200B4567C /* Build configuration list for PBXProject "SSCrypto" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
 			mainGroup = 0867D691FE84028FC02AAC07 /* SSCrypto */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -453,15 +457,13 @@
 		64A753D408F3259200B4567C /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Development;
 		};
@@ -469,7 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx10.6;
 			};
 			name = Deployment;
 		};
