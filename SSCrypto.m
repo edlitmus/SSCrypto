@@ -484,6 +484,27 @@
     cipherText = c;
 }
 
+/**
+ * Set the cipher text from a base64 encoded string.
+ * The cipher text will be used for decryption and verifying.
+**/
+- (void)setCipherTextFromBase64String:(NSString*) s
+{
+	[cipherText release];
+	NSData* data= [s dataUsingEncoding:NSUTF8StringEncoding];
+	cipherText = [data decodeBase64];
+	[cipherText retain];
+}
+
+/**
+ * Returns the cipher text as a base64 encoded string packaged in an NSString.
+ * The cipher text will be used for decryption and verifying.
+**/
+- (void)cipherTextAsBase64String
+{
+	return [cipherText encodeBase64];
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Decryption methods:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
