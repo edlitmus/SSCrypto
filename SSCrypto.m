@@ -500,7 +500,7 @@
  * Returns the cipher text as a base64 encoded string packaged in an NSString.
  * The cipher text will be used for decryption and verifying.
 **/
-- (void)cipherTextAsBase64String
+- (NSString *)cipherTextAsBase64String
 {
 	return [cipherText encodeBase64];
 }

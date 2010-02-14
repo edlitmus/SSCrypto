@@ -93,6 +93,9 @@
 - (NSString *)cipherTextAsString;
 - (void)setCipherText:(NSData *)c;
 
+- (void)setCipherTextFromBase64String:(NSString*)s;
+- (NSString *)cipherTextAsBase64String;
+
 - (NSData *)decrypt;
 - (NSData *)decrypt:(NSString *)cipherName;
 
