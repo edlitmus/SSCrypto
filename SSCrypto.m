@@ -68,10 +68,36 @@
         BIO_set_flags(b64, BIO_FLAGS_BASE64_NO_NL);
     mem = BIO_push(b64, mem);
     
-    // Encode all the data
-    BIO_write(mem, [self bytes], [self length]);
-    BIO_flush(mem);
+    NSUInteger length = [self length];
+    NSUInteger count = 0;
     
+    void *buffer = (void *)[self bytes];
+    int bufferSize = (int) MIN(length, (NSUInteger)INT_MAX);
+    
+    BOOL error = NO;
+    
+    // Encode all the data
+    while (!error && count < length)
+    {
+        int result = BIO_write(mem, buffer, bufferSize);
+        
+        if (result <= 0)
+        {
+            error = YES;
+        }
+        else
+        {
+            count += result;
+            buffer = (void *)[self bytes] + count;
+            bufferSize = (int) MIN((length - count), (NSUInteger)INT_MAX);
+        }
+    }
+    
+    if (!BIO_flush(mem)) {
+        NSLog(@"BIO_flush failed");
+        return nil;
+    }
+
     // Create a new string from the data in the memory buffer
     char * base64Pointer;
     long base64Length = BIO_get_mem_data(mem, &base64Pointer);
@@ -93,6 +119,8 @@
 
 - (NSData *)decodeBase64WithNewLines:(BOOL)encodedWithNewlines
 {
+    NSAssert1(([self length] <= INT_MAX), @"data length cannot be greater than %d", INT_MAX);
+
     // Create a memory buffer containing Base64 encoded string data
     BIO * mem = BIO_new_mem_buf((void *) [self bytes], [self length]);
 
@@ -667,7 +695,7 @@
 		unsigned long check = RSA_check_key(privateRSA);
 		if(check != 1)
 		{
-			NSLog(@"RSA_check_key() failed with result %d!", check);
+			NSLog(@"RSA_check_key() failed with result %lu!", check);
 			return nil;
 		}			
 		
@@ -987,7 +1015,7 @@
 	unsigned long check = RSA_check_key(privateRSA);
 	if(check != 1)
 	{
-		NSLog(@"RSA_check_key() failed with result %d!", check);
+		NSLog(@"RSA_check_key() failed with result %lu!", check);
 		return nil;
 	}			
 	
@@ -1138,7 +1166,7 @@
 	unsigned long check = RSA_check_key(privateRSA);
 	if (check != 1)
 	{
-		NSLog(@"RSA_check_key() failed with result %d!", check);
+		NSLog(@"RSA_check_key() failed with result %lu!", check);
 		return nil;
 	}			
 
