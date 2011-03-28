@@ -93,8 +93,9 @@
         }
     }
 
-    if (!BIO_flush(mem)) {
-        NSLog(@"BIO_flush failed");
+    int flush_result = BIO_flush(mem);
+    if (flush_result != 1) {
+        NSLog(@"BIO_flush failed: %d", flush_result);
         return nil;
     }
 
