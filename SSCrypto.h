@@ -103,6 +103,7 @@
 
 - (NSData *)encrypt;
 - (NSData *)encrypt:(NSString *)cipherName;
+- (NSData *)encrypt:(NSString *)cipherName withSalt:(BOOL)salted;
 
 - (NSData *)sign;
 

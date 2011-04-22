@@ -56,17 +56,39 @@ int main (int argc, const char * argv[])
 	{
 		NSData *cipherText = [crypto encrypt:[ciphers objectAtIndex:n]];
 		NSData *clearText = [crypto decrypt:[ciphers objectAtIndex:n]];
-		
+        NSData *base64 = [NSData dataWithBytes:[[clearText encodeBase64WithNewlines:NO] UTF8String] length:[[clearText encodeBase64WithNewlines:NO] length]];
+
 		NSLog(@"Original password: %@", password);
+		NSLog(@"Original password base64 encoded: %s", [base64 bytes]);
+		NSLog(@"Original password base64 decoded: %s", [[base64 decodeBase64WithNewLines:NO] bytes]);
 		NSLog(@"Cipher text: '%@' using %@", [cipherText encodeBase64WithNewlines:NO], [ciphers objectAtIndex:n]);
 		NSLog(@"Clear text: '%s' using %@", [clearText bytes], [ciphers objectAtIndex:n]);
-		
+
 		NSLog(@" ");
 	}
-	
+
 	NSLog(@" ");
 	NSLog(@" ");
-	
+
+    for(n = 0; n < [ciphers count]; n++)
+	{
+		NSData *cipherText = [crypto encrypt:[ciphers objectAtIndex:n] withSalt:TRUE];
+		NSData *clearText = [crypto decrypt:[ciphers objectAtIndex:n]];
+        NSData *base64 = [NSData dataWithBytes:[[clearText encodeBase64WithNewlines:NO] UTF8String] length:[[clearText encodeBase64WithNewlines:NO] length]];
+        
+		NSLog(@"Original password: %@", password);
+		NSLog(@"Original password base64 encoded: %s", [base64 bytes]);
+		NSLog(@"Original password base64 decoded: %s", [[base64 decodeBase64WithNewLines:NO] bytes]);
+		NSLog(@"Cipher text (salted): '%@' using %@", [cipherText hexval], [ciphers objectAtIndex:n]);
+		NSLog(@"Cipher text (salted): '%@' using %@", [cipherText encodeBase64WithNewlines:NO], [ciphers objectAtIndex:n]);
+		NSLog(@"Clear text: '%s' using %@", [clearText bytes], [ciphers objectAtIndex:n]);
+        
+		NSLog(@" ");
+	}
+    
+	NSLog(@" ");
+	NSLog(@" ");
+    
 	[crypto release];
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -214,27 +236,41 @@ int main (int argc, const char * argv[])
 	
 	// Decrypting is the same as running the following command in the terminal:
 	// echo -n "SLSbd6..."| openssl enc -base64 -d | openssl rsautl -decrypt -inkey Privatekey.pem
-	
-	crypto = [[SSCrypto alloc] initWithPublicKey:publicKeyData privateKey:privateKeyData];
-	
-    NSError *err;
-	topSecret = [NSString stringWithContentsOfFile:@"../../moose.txt" encoding:NSUTF8StringEncoding error:&err];
-	[crypto setClearTextWithString:topSecret];
-	
-	encryptedTextData = [crypto encrypt];
-	decryptedTextData = [crypto decrypt];
-    
-	NSLog(@"Top Secret: %@", topSecret);
-	NSLog(@"Top Secret: %@", [[crypto clearTextAsData] hexval]);
-	NSLog(@"Encrypted:\n%@", [encryptedTextData encodeBase64]);
-	NSLog(@"Decrypted: %@", [decryptedTextData hexval]);
-	NSLog(@"Decrypted: %@", [crypto clearTextAsString]);
-	
-	NSLog(@" ");
-	NSLog(@" ");
-	NSLog(@" ");
-    
-	[crypto release];
+
+    NSString *moosePath = @"/Users/ed/Projects/SScrypto/moose.txt";
+	if ([[NSFileManager defaultManager] fileExistsAtPath:moosePath]) {
+        crypto = [[SSCrypto alloc] initWithPublicKey:publicKeyData privateKey:privateKeyData];
+        
+        NSError *err;
+        topSecret = [NSString stringWithContentsOfFile:moosePath encoding:NSUTF8StringEncoding error:&err];
+        if (!topSecret) {
+            NSLog(@"error: %@", err);
+        }
+        [crypto setClearTextWithString:topSecret];
+        
+        encryptedTextData = [crypto encrypt];
+        decryptedTextData = [crypto decrypt];
+        
+        NSLog(@"Top Secret: %@", topSecret);
+        NSLog(@"Top Secret: %@", [[crypto clearTextAsData] hexval]);
+        NSLog(@"Encrypted:\n%@", [encryptedTextData encodeBase64]);
+        NSLog(@"Decrypted: %@", [decryptedTextData hexval]);
+        NSLog(@"Decrypted: %@", [crypto clearTextAsString]);
+
+        NSLog(@" ");
+        NSLog(@" ");
+        NSLog(@" ");
+        
+        [crypto release];
+    }
+    else {
+        NSLog(@"where is moose.txt?!");
+        NSLog(@"can't test the UTF-8 stuff without it...");
+
+        NSLog(@" ");
+        NSLog(@" ");
+        NSLog(@" ");
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     

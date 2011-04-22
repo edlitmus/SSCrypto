@@ -844,6 +844,11 @@
  **/
 - (NSData *)encrypt:(NSString *)cipherName
 {
+    return [self encrypt:cipherName withSalt:FALSE];
+}
+
+- (NSData *)encrypt:(NSString *)cipherName withSalt:(BOOL)salted
+{
     // If there is no clear text set, or the clear text is an empty string (zero length data)
     // then there is nothing to encrypt, and we may as well return nil
     if(clearText == nil || [clearText length] == 0)
@@ -851,6 +856,7 @@
         return nil;
     }
 
+    NSData *salt = nil;
     unsigned char *input = (unsigned char *)[clearText bytes];
     unsigned char *outbuf, iv[EVP_MAX_IV_LENGTH];
     int outlen, templen, inlen;
@@ -878,7 +884,11 @@
             }
         }
 
-        EVP_BytesToKey(cipher, EVP_md5(), NULL,
+        if (salted) {
+            salt = [SSCrypto getKeyDataWithLength:8];
+            NSAssert(salt, @"Random salt could not be alloc'd or generated");
+        }
+        EVP_BytesToKey(cipher, EVP_md5(), [salt bytes],
                        [[self symmetricKey] bytes], (int) [[self symmetricKey] length], 1, evp_key, iv);
         EVP_CIPHER_CTX_init(&cCtx);
 
@@ -892,7 +902,20 @@
         // The data buffer passed to EVP_EncryptUpdate() should have sufficient room for
         // (input_length + cipher_block_size - 1)
 
-        outbuf = (unsigned char *)calloc(inlen + EVP_CIPHER_CTX_block_size(&cCtx) - 1, sizeof(unsigned char));
+        if (salted) {
+            /* "Salted__01234567" = 16 bytes  */
+            outbuf = (unsigned char *)calloc(inlen + EVP_CIPHER_CTX_block_size(&cCtx) + 16 - 1, sizeof(unsigned char));
+
+            // Write "Salted__" string followed by salt bytes to outbuf:
+            memcpy(outbuf, "Salted__", 8);
+            memcpy(outbuf + 8, [salt bytes], 8);
+
+            // Move pointer forward by 16 bytes:
+            outbuf += 16;
+        }
+        else {
+            outbuf = (unsigned char *)calloc(inlen + EVP_CIPHER_CTX_block_size(&cCtx) - 1, sizeof(unsigned char));
+        }
         NSAssert(outbuf, @"Cannot allocate memory for buffer!");
 
         if (!EVP_EncryptUpdate(&cCtx, outbuf, &outlen, input, inlen))
@@ -907,9 +930,16 @@
             EVP_CIPHER_CTX_cleanup(&cCtx);
             return nil;
         }
-        outlen += templen;
-        EVP_CIPHER_CTX_cleanup(&cCtx);
+        if (salted) {
+            outlen += templen + 16 /* "Salted__01234567" = 16 bytes */;
 
+            // Move pointer back by 16 bytes:
+            outbuf -= 16;
+        }
+        else {
+            outlen += templen;
+        }
+        EVP_CIPHER_CTX_cleanup(&cCtx);
     }
     else
     {
