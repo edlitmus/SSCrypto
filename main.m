@@ -80,7 +80,7 @@ int main (int argc, const char * argv[])
 		NSLog(@"Original password base64 encoded: %s", [base64 bytes]);
 		NSLog(@"Original password base64 decoded: %s", [[base64 decodeBase64WithNewLines:NO] bytes]);
 		NSLog(@"Cipher text (salted): '%@' using %@", [cipherText hexval], [ciphers objectAtIndex:n]);
-		NSLog(@"Cipher text (salted): '%@' using %@", [cipherText encodeBase64WithNewlines:NO], [ciphers objectAtIndex:n]);
+		NSLog(@"Cipher text b64 (salted): '%@' using %@", [cipherText encodeBase64WithNewlines:NO], [ciphers objectAtIndex:n]);
 		NSLog(@"Clear text: '%s' using %@", [clearText bytes], [ciphers objectAtIndex:n]);
         
 		NSLog(@" ");
@@ -103,7 +103,7 @@ int main (int argc, const char * argv[])
 	
 	crypto = [[SSCrypto alloc] init];
 	
-	NSArray *digests = [NSArray arrayWithObjects:@"MD2", @"MD4", @"MD5", @"SHA1", @"RIPEMD160", nil];
+	NSArray *digests = [NSArray arrayWithObjects:@"MD4", @"MD5", @"SHA1", @"RIPEMD160", nil];
 	
 	NSString *secret = @"I like cheese";
     [crypto setClearTextWithString:secret];
