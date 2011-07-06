@@ -72,7 +72,7 @@
     NSUInteger count = 0;
 
     void *buffer = (void *)[self bytes];
-    int bufferSize = (int) MIN(length, (NSUInteger)INT_MAX);
+    NSUInteger bufferSize = (long) MIN(length, (NSUInteger)INT_MAX);
 
     BOOL error = NO;
 
@@ -89,7 +89,7 @@
         {
             count += result;
             buffer = (void *)[self bytes] + count;
-            bufferSize = (int) MIN((length - count), (NSUInteger)INT_MAX);
+            bufferSize = (NSUInteger) MIN((length - count), (NSUInteger)INT_MAX);
         }
     }
 
@@ -133,14 +133,14 @@
 
     // Decode into an NSMutableData
     NSMutableData * data = [NSMutableData data];
-    char inbuf[512];
-    int inlen;
-    while ((inlen = BIO_read(mem, inbuf, sizeof(inbuf))) > 0)
-        [data appendBytes: inbuf length: inlen];
-
+    char inbuf[512] = {0};
+    int inlen = 0;
+    while ((inlen = BIO_read(mem, inbuf, sizeof(inbuf))) > 0) {
+        [data appendBytes: (const void *)inbuf length: inlen];
+    }
     // Clean up and go home
     BIO_free_all(mem);
-    return data;
+    return [NSData dataWithData:data];
 }
 
 - (NSString *)hexval
@@ -167,7 +167,7 @@
      *                  30 FF 00 00 00 00 39 00 unknown 0.....9.
      * (in a single line of course)
      */
-    NSUInteger size= [self length];
+    NSUInteger size = [self length];
     const unsigned char *p = [self bytes];
     unsigned char c;
     int n;
