@@ -1,0 +1,27 @@
+Welcome to the SSCrypto framework!
+
+To get a feel of how to work with the framework, take a glance at the main.m file included in the Xcode project.  You should find that it's well documented, and easy to read.
+
+When you're ready to start using the framework in your project, follow the steps below:
+
+First compile the SSCrypto framework in Xcode.  This is as easy as setting the build configuration to "Deployment", and clicking Build.  Don't worry, it will be compiled as a universal binary.
+
+Copy the SSCrypto.framework folder into the folder for your own project.  The SSCrypto.framework folder is in build/Deployment.
+
+Add the SSCrypto.framework to your project.  You should be able to find the framework folder in your own project folder, since you just copied it there.  You'll probably also want to make sure it's in the "Linked Frameworks" folder.
+
+Next you'll want to add those other two dylib files to your project.  These are the dynamic libraries for SSL and crytography routines.  You can find them in:
+/usr/lib/libssl.dylib
+/usr/lib/libcrypto.dylib
+
+Now the two dylib files you just added will be on every mac computer that uses your application.  So it's OK that you are simply linking to them.  But the SSCrypto framework will not be on every mac computer, so we need to tell our application to include it.  Do this by adding a "New Copy files build phase" to your product, and setting the destination to Frameworks.  Then drag the SSCrypto.framework (in Linked Frameworks) down into your new build phase.
+
+Just one more step and you're done!
+
+In your code, you'll need to include the framework in the files where you want to use it.  So add the following code :
+
+#import <SSCrypto/SSCrypto.h>
+
+And now you're ready to use the framework, and get back to innovating!
+
+Enjoy!
