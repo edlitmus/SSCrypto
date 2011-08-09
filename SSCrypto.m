@@ -138,6 +138,10 @@
     while ((inlen = BIO_read(mem, inbuf, sizeof(inbuf))) > 0) {
         [data appendBytes: (const void *)inbuf length: inlen];
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> sync up to svn
     // Clean up and go home
     BIO_free_all(mem);
     return [NSData dataWithData:data];
