@@ -314,11 +314,7 @@
 		64A753CC08F3259200B4567C /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-<<<<<<< HEAD
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-=======
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
->>>>>>> sync
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -358,11 +354,7 @@
 		64A753CD08F3259200B4567C /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-<<<<<<< HEAD
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-=======
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
->>>>>>> sync
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -402,11 +394,7 @@
 		64A753D008F3259200B4567C /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-<<<<<<< HEAD
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-=======
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
->>>>>>> sync
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -435,11 +423,7 @@
 		64A753D108F3259200B4567C /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-<<<<<<< HEAD
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-=======
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
->>>>>>> sync
 				COPY_PHASE_STRIP = YES;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
