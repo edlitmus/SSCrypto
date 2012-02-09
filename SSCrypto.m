@@ -844,7 +844,7 @@
  **/
 - (NSData *)encrypt:(NSString *)cipherName
 {
-    return [self encrypt:cipherName withSalt:FALSE];
+    return [self encrypt:cipherName withSalt:NO];
 }
 
 - (NSData *)encrypt:(NSString *)cipherName withSalt:(BOOL)salted
