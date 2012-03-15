@@ -110,7 +110,7 @@
 
     // Clean up and go home
     BIO_free_all(mem);
-    return [base64String autorelease];
+    return base64String;
 }
 
 - (NSData *)decodeBase64
@@ -339,14 +339,8 @@
     [self cleanupOpenSSL];
 
     // Release all instance variables
-    [symmetricKey release];
-    [cipherText release];
-    [clearText release];
-    [publicKey release];
-    [privateKey release];
 
     // Move up the inheritance chain
-    [super dealloc];
 }
 
 - (void)cleanupOpenSSL
@@ -384,8 +378,6 @@
 
 - (void)setSymmetricKey:(NSData *)k
 {
-    [k retain];
-    [symmetricKey release];
     symmetricKey = k;
 }
 
@@ -403,8 +395,6 @@
  **/
 - (void)setPublicKey:(NSData *)k
 {
-    [k retain];
-    [publicKey release];
     publicKey = k;
 }
 
@@ -424,8 +414,6 @@
  **/
 - (void)setPrivateKey:(NSData *)k
 {
-    [k retain];
-    [privateKey release];
     privateKey = k;
 }
 
@@ -446,7 +434,7 @@
  **/
 - (NSString *)clearTextAsString
 {
-    return [[[NSString alloc] initWithData:[self clearTextAsData] encoding:NSUTF8StringEncoding] autorelease];
+    return [[NSString alloc] initWithData:[self clearTextAsData] encoding:NSUTF8StringEncoding];
 }
 
 /**
@@ -457,8 +445,6 @@
  **/
 - (void)setClearTextWithData:(NSData *)c
 {
-    [c retain];
-    [clearText release];
     clearText = c;
 }
 
@@ -468,7 +454,6 @@
  **/
 - (void)setClearTextWithString:(NSString *)c
 {
-    [clearText release];
 
     // BUG FIX : PLL (2009/02/21)
     //
@@ -499,7 +484,7 @@
  **/
 - (NSString *)cipherTextAsString
 {
-    return [[[NSString alloc] initWithData:[self cipherTextAsData] encoding:NSUTF8StringEncoding] autorelease];
+    return [[NSString alloc] initWithData:[self cipherTextAsData] encoding:NSUTF8StringEncoding];
 }
 
 /**
@@ -508,8 +493,6 @@
  **/
 - (void)setCipherText:(NSData *)c
 {
-    [c retain];
-    [cipherText release];
     cipherText = c;
 }
 
@@ -519,10 +502,8 @@
  **/
 - (void)setCipherTextFromBase64String:(NSString*) s
 {
-    [cipherText release];
     NSData* data= [s dataUsingEncoding:NSUTF8StringEncoding];
     cipherText = [data decodeBase64];
-    [cipherText retain];
 }
 
 /**
